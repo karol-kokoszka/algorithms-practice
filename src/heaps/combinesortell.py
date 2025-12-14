@@ -1,6 +1,30 @@
 from typing import List
 from src.linkedlist.utils import ListNode
 from src.heaps.utils import HeapImpl
+from itertools import count
+import heapq
+
+def combine_sorted_linked_lists_python_heap(lists: List[ListNode]) -> ListNode:
+    h = []
+    ctr = count()
+    
+    for l in lists:
+        if l:
+            h.append((l.val, next(ctr), l))
+    heapq.heapify(h)
+
+    head = ListNode()
+    current = head
+
+    while h:
+        minFromHeap = heapq.heappop(h)
+        current.next = ListNode(minFromHeap[0])
+        current = current.next
+        elem = minFromHeap[2].next
+        if elem:
+            heapq.heappush(h, (elem.val, next(ctr), elem))
+    
+    return head.next
 
 def combine_sorted_linked_lists(lists: List[ListNode]) -> ListNode:
     def compare(a: ListNode, b: ListNode) -> int:

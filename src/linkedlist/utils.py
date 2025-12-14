@@ -59,17 +59,17 @@ class ListNode:
             current = current.next
         return " -> ".join(values)
     
-    # def __eq__(self, other):
-    #     if not isinstance(other, ListNode):
-    #         return False
+    def __eq__(self, other):
+        if not isinstance(other, ListNode):
+            return False
 
-    #     a, b = self, other
-    #     while a and b:
-    #         if a.val != b.val:
-    #             return False
-    #         a, b = a.next, b.next
+        a, b = self, other
+        while a and b:
+            if a.val != b.val:
+                return False
+            a, b = a.next, b.next
 
-    #     return a is None and b is None
+        return a is None and b is None
     
 def list_node_from_array(array: List[int]) -> ListNode:
     if len(array) == 0:
